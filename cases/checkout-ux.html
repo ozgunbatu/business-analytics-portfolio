@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Checkout UX | Batuhan Dogan</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-slate-50">
+
+<nav class="bg-white border-b p-4">
+<div class="max-w-6xl mx-auto flex justify-between">
+<a href="../index.html">← Home</a>
+<span class="font-black">Batuhan Dogan</span>
+</div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-6 py-20">
+
+<h1 class="text-5xl font-black mb-6">Checkout UX Optimisation</h1>
+
+<p class="text-xl text-slate-600 mb-12">
+Data-driven UX improvements increasing funnel conversion.
+</p>
+
+<section class="mb-20">
+<canvas id="uxChart"></canvas>
+</section>
+
+<script>
+new Chart(uxChart,{
+type:"bar",
+data:{
+labels:["Old","New"],
+datasets:[{label:"Conversion %",data:[2.8,3.3]}]
+}
+});
+</script>
+
+</main>
+</body>
+</html>
