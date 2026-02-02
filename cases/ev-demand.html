@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EV Demand Forecast | Batuhan Dogan</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-slate-50">
+
+<nav class="bg-white border-b p-4">
+<div class="max-w-6xl mx-auto flex justify-between">
+<a href="../index.html">← Home</a>
+<span class="font-black">Batuhan Dogan</span>
+</div>
+</nav>
+
+<main class="max-w-6xl mx-auto px-6 py-20">
+
+<h1 class="text-5xl font-black mb-6">EV Demand Forecast – Germany</h1>
+
+<p class="text-xl text-slate-600 mb-12">
+SQL-driven demand forecasting to reduce over-stocking and optimise EV allocation.
+</p>
+
+<div class="grid md:grid-cols-4 gap-6 mb-20">
+<div class="bg-white p-6 rounded-2xl shadow">Inventory −7%</div>
+<div class="bg-white p-6 rounded-2xl shadow">Forecast error −22%</div>
+<div class="bg-white p-6 rounded-2xl shadow">2.3M rows</div>
+<div class="bg-white p-6 rounded-2xl shadow">SQL · BI</div>
+</div>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Dashboard</h2>
+<div class="bg-white p-10 rounded-3xl shadow">
+<canvas id="evChart"></canvas>
+</div>
+</section>
+
+<script>
+new Chart(evChart,{
+type:"line",
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun"],
+datasets:[{label:"Demand",data:[120,150,180,240,300,360]}]
+}
+});
+</script>
+
+</main>
+</body>
+</html>
