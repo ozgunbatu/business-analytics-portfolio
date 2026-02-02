@@ -29,3 +29,9 @@ A static HTML portfolio website showcasing analytics, product thinking, and UX s
 - Language toggle (English/German)
 - Case study showcase grid
 - Contact section
+
+commit:
+
+git add README.md
+git commit -m "Trigger GitHub Pages redeploy"
+git push origin main
