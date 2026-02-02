@@ -1,99 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8">
 <title>EV Demand Forecast | Batuhan Dogan</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body class="bg-slate-50">
 
 <nav class="bg-white border-b p-4">
-<div class="max-w-6xl mx-auto flex justify-between">
-<a href="../index.html">← Home</a>
-<span class="font-black">Batuhan Dogan</span>
-</div>
+  <div class="max-w-6xl mx-auto flex justify-between">
+    <a href="../index.html">← Home</a>
+    <span class="font-black">Batuhan Dogan</span>
+  </div>
 </nav>
 
 <main class="max-w-6xl mx-auto px-6 py-20">
 
 <h1 class="text-5xl font-black mb-6">EV Demand Forecast – Germany</h1>
 <p class="text-xl text-slate-600 mb-12">
-SQL-driven demand forecasting to reduce over-stocking and optimize EV allocation.
+Elimdeki AutoScout24 ve ZSW verilerini kullanarak bölge bazında EV satış ve stok trendlerini çıkardım, SQL ile temizledim, Power BI’da görselleştirdim ve simülasyonlar ile stok dağılımı önerileri sundum.
 </p>
 
-<!-- Key Metrics -->
+<!-- KPI Cards -->
 <div class="grid md:grid-cols-4 gap-6 mb-20">
-<div class="bg-white p-6 rounded-2xl shadow">Inventory −7%</div>
-<div class="bg-white p-6 rounded-2xl shadow">Forecast error −22%</div>
-<div class="bg-white p-6 rounded-2xl shadow">2.3M rows</div>
-<div class="bg-white p-6 rounded-2xl shadow">SQL · Power BI</div>
+  <div class="bg-white p-6 rounded-2xl shadow">Inventory Cost ↓7%</div>
+  <div class="bg-white p-6 rounded-2xl shadow">Forecast Error ↓22%</div>
+  <div class="bg-white p-6 rounded-2xl shadow">Decision Speed ↑15%</div>
+  <div class="bg-white p-6 rounded-2xl shadow">6 Regions Optimized</div>
 </div>
 
+<!-- Power BI / Chart.js Dashboard -->
 <section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Problem Statement</h2>
-<p class="text-slate-600">
-Overstocking of EVs in some regions while others face shortage, leading to lost revenue and poor allocation efficiency.
+<h2 class="text-3xl font-bold mb-4">Interactive Dashboard & Simulation</h2>
+<p class="text-slate-600 mb-6">
+Region-wise EV demand forecast and inventory allocation. Use the slider below to simulate changes in demand and see how KPIs are affected.
 </p>
+
+<div class="bg-white p-10 rounded-3xl shadow mb-10">
+  <canvas id="evChart"></canvas>
+</div>
+
+<label for="demandSlider" class="block mb-2 font-semibold">Demand Simulation Slider</label>
+<input type="range" id="demandSlider" min="-20" max="20" value="0" step="1" class="w-full mb-4">
+
+<p class="text-slate-600" id="simResult">Adjust the slider to simulate changes in demand.</p>
 </section>
 
+<!-- Data Sources -->
 <section class="mb-20">
 <h2 class="text-3xl font-bold mb-4">Data Sources</h2>
 <ul class="list-disc ml-6 text-slate-600">
-<li>AutoScout24 Germany Car Listings Dataset (~120K rows) – <a href="https://zenodo.org/records/17643343" target="_blank" class="text-emerald-600 underline">Link</a></li>
+<li>AutoScout24 Germany Car Listings (~120K rows) – <a href="https://zenodo.org/records/17643343" target="_blank" class="text-emerald-600 underline">Link</a></li>
 <li>Germany Cars Dataset (ZenRows) (~45K rows) – <a href="https://www.zenrows.com/datasets/germany-cars" target="_blank" class="text-emerald-600 underline">Link</a></li>
 <li>ZSW Electromobility Data Service – EV stock & growth – <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="text-emerald-600 underline">Link</a></li>
 </ul>
 </section>
 
-<section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Methodology</h2>
-<ul class="list-disc ml-6 text-slate-600">
-<li>Filtered & cleaned EV data from all sources using SQL</li>
-<li>Aggregated monthly sales & inventory by region</li>
-<li>Applied trend analysis & seasonality adjustments</li>
-<li>Built Power BI dashboards for region-wise allocation</li>
-<li>Validated forecasts against historical data & ZSW statistics</li>
-</ul>
-</section>
-
-<section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Solution & Implementation</h2>
-<p class="text-slate-600">
-Developed a region-wise inventory allocation dashboard in Power BI, automated weekly SQL reports, and provided recommendations for optimal stock distribution.
-</p>
-</section>
-
-<section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Results / KPIs</h2>
-<ul class="list-disc ml-6 text-slate-600">
-<li>Inventory costs reduced by 7%</li>
-<li>Forecast error reduced by 22%</li>
-<li>Decision-making speed for operations team increased by 15%</li>
-<li>Enhanced allocation efficiency across 6 regions</li>
-</ul>
-</section>
-
-<section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Visual Dashboard</h2>
-<div class="bg-white p-10 rounded-3xl shadow mb-10">
-<canvas id="evChart"></canvas>
-</div>
-</section>
-
 <script>
-new Chart(document.getElementById('evChart'), {
-type: 'line',
-data: {
-labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-datasets: [
-{ label: "Forecast Demand", data: [120,150,180,240,300,360,400,420], borderColor: "rgb(34,197,94)", fill: false },
-{ label: "Actual Demand", data: [110,145,170,230,310,355,390,430], borderColor: "rgb(14,165,233)", fill: false }
-]
-},
-options: { responsive:true, plugins:{legend:{display:true}} }
+const ctx = document.getElementById('evChart').getContext('2d');
+
+const initialData = [120,150,180,240,300,360,400,420];
+const actualData = [110,145,170,230,310,355,390,430];
+
+const evChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+    datasets: [
+      { label: "Forecast Demand", data: initialData, borderColor: "rgb(34,197,94)", fill: false, tension:0.2 },
+      { label: "Actual Demand", data: actualData, borderColor: "rgb(14,165,233)", fill: false, tension:0.2 }
+    ]
+  },
+  options: {
+    responsive:true,
+    plugins:{ legend:{ display:true } }
+  }
 });
+
+// Slider simulation
+const slider = document.getElementById('demandSlider');
+const simResult = document.getElementById('simResult');
+
+slider.oninput = () => {
+  const delta = parseInt(slider.value);
+  evChart.data.datasets[0].data = initialData.map(v => v + delta*3); // simulate change
+  evChart.data.datasets[1].data = actualData.map(v => v + delta*2); // simulate effect on actual
+  evChart.update();
+
+  simResult.textContent = `Simulated change: Forecast Demand ${delta*3 >=0 ? '+' : ''}${delta*3} units, Actual Demand ${delta*2 >=0 ? '+' : ''}${delta*2} units`;
+};
 </script>
 
 </main>
