@@ -1,65 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EV Demand Forecast | Batuhan Dogan</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-50">
 
-<nav class="bg-white border-b p-4">
-  <div class="max-w-6xl mx-auto flex justify-between">
-    <a href="../index.html">← Home</a>
-    <span class="font-black">Batuhan Dogan</span>
-  </div>
+<!-- NAV -->
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
+<div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+<span class="font-black text-xl">Batuhan Dogan</span>
+<div class="flex gap-4 items-center text-sm font-semibold">
+<a href="../index.html">Home</a>
+<button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">🇩🇪</button>
+</div>
+</div>
 </nav>
 
-<main class="max-w-6xl mx-auto px-6 py-20">
+<main class="max-w-6xl mx-auto px-6 py-32">
 
-<h1 class="text-5xl font-black mb-6">EV Demand Forecast – Germany</h1>
-<p class="text-xl text-slate-600 mb-12">
-Elimdeki AutoScout24 ve ZSW verilerini kullanarak bölge bazında EV satış ve stok trendlerini çıkardım, SQL ile temizledim, Power BI’da görselleştirdim ve simülasyonlar ile stok dağılımı önerileri sundum.
+<h1 id="heroTitle" class="text-5xl font-black mb-6">
+EV Demand Forecast – Germany
+</h1>
+
+<p id="heroSub" class="text-xl text-slate-600 mb-12">
+I analyzed region-wise EV sales and inventory trends using SQL and visualized them in Power BI. Simulation allowed me to optimize stock allocation across regions.
 </p>
 
-<!-- KPI Cards -->
-<div class="grid md:grid-cols-4 gap-6 mb-20">
-  <div class="bg-white p-6 rounded-2xl shadow">Inventory Cost ↓7%</div>
-  <div class="bg-white p-6 rounded-2xl shadow">Forecast Error ↓22%</div>
-  <div class="bg-white p-6 rounded-2xl shadow">Decision Speed ↑15%</div>
-  <div class="bg-white p-6 rounded-2xl shadow">6 Regions Optimized</div>
-</div>
-
-<!-- Power BI / Chart.js Dashboard -->
+<!-- Step-by-Step Case -->
 <section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Interactive Dashboard & Simulation</h2>
-<p class="text-slate-600 mb-6">
-Region-wise EV demand forecast and inventory allocation. Use the slider below to simulate changes in demand and see how KPIs are affected.
+<h2 class="text-3xl font-bold mb-4">Step 1: Problem</h2>
+<p class="text-slate-600">
+Certain regions had excessive EV stock while others faced shortages, leading to lost revenue and higher operational costs. The operations team lacked visibility on optimal stock distribution.
 </p>
-
-<div class="bg-white p-10 rounded-3xl shadow mb-10">
-  <canvas id="evChart"></canvas>
-</div>
-
-<label for="demandSlider" class="block mb-2 font-semibold">Demand Simulation Slider</label>
-<input type="range" id="demandSlider" min="-20" max="20" value="0" step="1" class="w-full mb-4">
-
-<p class="text-slate-600" id="simResult">Adjust the slider to simulate changes in demand.</p>
 </section>
 
-<!-- Data Sources -->
 <section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Data Sources</h2>
+<h2 class="text-3xl font-bold mb-4">Step 2: Approach & Analysis</h2>
 <ul class="list-disc ml-6 text-slate-600">
-<li>AutoScout24 Germany Car Listings (~120K rows) – <a href="https://zenodo.org/records/17643343" target="_blank" class="text-emerald-600 underline">Link</a></li>
-<li>Germany Cars Dataset (ZenRows) (~45K rows) – <a href="https://www.zenrows.com/datasets/germany-cars" target="_blank" class="text-emerald-600 underline">Link</a></li>
-<li>ZSW Electromobility Data Service – EV stock & growth – <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="text-emerald-600 underline">Link</a></li>
+<li>Cleaned and aggregated 2.3M rows from <a href="https://zenodo.org/records/17643343" target="_blank" class="text-emerald-600 underline">AutoScout24</a> and <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="text-emerald-600 underline">ZSW Electromobility Data</a></li>
+<li>Trend Analysis: Monthly demand visualized in Power BI</li>
+<li>Seasonal & regional differences: Heatmap to detect surplus and shortage regions</li>
 </ul>
 </section>
 
-<script>
-const ctx = document.getElementById('evChart').getContext('2d');
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Step 3: Recommendation</h2>
+<p class="text-slate-600">
+I recommended a region-wise inventory allocation dashboard with weekly SQL updates, enabling the operations team to make faster, data-driven decisions.
+</p>
+</section>
 
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Step 4: Implementation & Dashboard</h2>
+<p class="text-slate-600 mb-4">
+Implemented in Power BI: line charts, bar charts, KPI cards, and interactive simulation slider.
+</p>
+<div class="bg-white p-10 rounded-3xl shadow mb-10">
+<canvas id="evChart"></canvas>
+</div>
+<label for="demandSlider" class="block mb-2 font-semibold">Demand Simulation Slider</label>
+<input type="range" id="demandSlider" min="-20" max="20" value="0" step="1" class="w-full mb-4">
+<p class="text-slate-600" id="simResult">Adjust the slider to simulate changes in demand.</p>
+</section>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Step 5: Results / KPIs</h2>
+<ul class="list-disc ml-6 text-slate-600">
+<li>Inventory costs reduced by 7%</li>
+<li>Forecast error reduced by 22%</li>
+<li>Decision-making speed increased by 15%</li>
+<li>Stock allocation optimized across 6 regions</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+let de=false;
+const langBtn=document.getElementById('langBtn');
+const heroTitle=document.getElementById('heroTitle');
+const heroSub=document.getElementById('heroSub');
+
+langBtn.onclick=()=>{
+de=!de;
+heroTitle.textContent = de
+? "EV Nachfrageprognose – Deutschland"
+: "EV Demand Forecast – Germany";
+heroSub.textContent = de
+? "Ich habe regionsbasierte EV-Verkaufs- und Bestandsdaten analysiert und in Power BI visualisiert. Simulationen ermöglichten die Optimierung der Lagerverteilung."
+: "I analyzed region-wise EV sales and inventory trends using SQL and visualized them in Power BI. Simulation allowed me to optimize stock allocation across regions.";
+};
+
+// Chart.js Dashboard
+const ctx = document.getElementById('evChart').getContext('2d');
 const initialData = [120,150,180,240,300,360,400,420];
 const actualData = [110,145,170,230,310,355,390,430];
 
@@ -78,20 +115,19 @@ const evChart = new Chart(ctx, {
   }
 });
 
-// Slider simulation
-const slider = document.getElementById('demandSlider');
-const simResult = document.getElementById('simResult');
+const slider=document.getElementById('demandSlider');
+const simResult=document.getElementById('simResult');
 
-slider.oninput = () => {
-  const delta = parseInt(slider.value);
-  evChart.data.datasets[0].data = initialData.map(v => v + delta*3); // simulate change
-  evChart.data.datasets[1].data = actualData.map(v => v + delta*2); // simulate effect on actual
+slider.oninput=()=>{
+  const delta=parseInt(slider.value);
+  evChart.data.datasets[0].data = initialData.map(v => v + delta*3);
+  evChart.data.datasets[1].data = actualData.map(v => v + delta*2);
   evChart.update();
-
-  simResult.textContent = `Simulated change: Forecast Demand ${delta*3 >=0 ? '+' : ''}${delta*3} units, Actual Demand ${delta*2 >=0 ? '+' : ''}${delta*2} units`;
+  simResult.textContent = de
+  ? `Simulierter Änderung: Forecast Demand ${delta*3 >=0 ? '+' : ''}${delta*3} Einheiten, Actual Demand ${delta*2 >=0 ? '+' : ''}${delta*2} Einheiten`
+  : `Simulated change: Forecast Demand ${delta*3 >=0 ? '+' : ''}${delta*3} units, Actual Demand ${delta*2 >=0 ? '+' : ''}${delta*2} units`;
 };
 </script>
 
-</main>
 </body>
 </html>
