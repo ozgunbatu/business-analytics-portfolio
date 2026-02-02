@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>EV Demand Forecast | Batuhan Dogan</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -19,33 +17,63 @@
 </nav>
 
 <main class="max-w-6xl mx-auto px-6 py-20">
-
 <h1 class="text-5xl font-black mb-6">EV Demand Forecast – Germany</h1>
+<p class="text-xl text-slate-600 mb-12">SQL-driven demand forecasting to reduce over-stocking and optimize EV allocation.</p>
 
-<p class="text-xl text-slate-600 mb-12">
-SQL-driven demand forecasting to reduce over-stocking and optimise EV allocation.
-</p>
-
+<!-- Key Metrics -->
 <div class="grid md:grid-cols-4 gap-6 mb-20">
 <div class="bg-white p-6 rounded-2xl shadow">Inventory −7%</div>
 <div class="bg-white p-6 rounded-2xl shadow">Forecast error −22%</div>
 <div class="bg-white p-6 rounded-2xl shadow">2.3M rows</div>
-<div class="bg-white p-6 rounded-2xl shadow">SQL · BI</div>
+<div class="bg-white p-6 rounded-2xl shadow">SQL · Power BI</div>
 </div>
 
 <section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Dashboard</h2>
+<h2 class="text-3xl font-bold mb-4">Problem Statement</h2>
+<p class="text-slate-600">Overstocking of EVs in some regions while others face shortage, leading to lost revenue and poor allocation efficiency.</p>
+</section>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Methodology</h2>
+<ul class="list-disc ml-6 text-slate-600">
+<li>Extracted 2.3M sales & inventory records via SQL</li>
+<li>Built Power BI dashboards to track monthly demand by region</li>
+<li>Applied trend analysis and seasonal adjustments</li>
+<li>Validated forecasts with historical data</li>
+</ul>
+</section>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Solution & Implementation</h2>
+<p class="text-slate-600">Developed a region-wise inventory allocation dashboard in Power BI and automated weekly SQL reports for operational teams.</p>
+</section>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Results / Impact</h2>
+<ul class="list-disc ml-6 text-slate-600">
+<li>Inventory costs reduced by 7%</li>
+<li>Forecast error reduced by 22%</li>
+<li>Enhanced decision-making speed for operations team</li>
+</ul>
+</section>
+
+<section class="mb-20">
+<h2 class="text-3xl font-bold mb-4">Visual Dashboard</h2>
 <div class="bg-white p-10 rounded-3xl shadow">
 <canvas id="evChart"></canvas>
 </div>
 </section>
 
 <script>
-new Chart(evChart,{
+new Chart(document.getElementById('evChart'),{
 type:"line",
 data:{
 labels:["Jan","Feb","Mar","Apr","May","Jun"],
-datasets:[{label:"Demand",data:[120,150,180,240,300,360]}]
+datasets:[{label:"EV Demand",data:[120,150,180,240,300,360],borderColor:"rgb(34,197,94)",fill:false}]
+},
+options:{
+responsive:true,
+plugins:{legend:{display:true}}
 }
 });
 </script>
