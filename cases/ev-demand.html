@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-50">
-  
+
 <!-- NAV -->
 <nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
 <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
@@ -32,7 +32,7 @@ I analyzed region-wise EV sales and inventory trends using SQL and visualized th
 
 <!-- Step-by-Step Case -->
 <section class="mb-20">
-<h2 class="text-3xl font-bold mb-4">Step 1: Problem</h2>
+<h2 class="text-3xl font-bold mb-4">Step 1: Problem / Opportunity</h2>
 <p class="text-slate-600">
 Certain regions had excessive EV stock while others faced shortages, leading to lost revenue and higher operational costs. The operations team lacked visibility on optimal stock distribution.
 </p>
@@ -42,23 +42,25 @@ Certain regions had excessive EV stock while others faced shortages, leading to 
 <h2 class="text-3xl font-bold mb-4">Step 2: Approach & Analysis</h2>
 <ul class="list-disc ml-6 text-slate-600">
 <li>Cleaned and aggregated 2.3M rows from <a href="https://zenodo.org/records/17643343" target="_blank" class="text-emerald-600 underline">AutoScout24</a> and <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="text-emerald-600 underline">ZSW Electromobility Data</a></li>
-<li>Trend Analysis: Monthly demand visualized in Power BI</li>
-<li>Seasonal & regional differences: Heatmap to detect surplus and shortage regions</li>
+<li><strong>Trend Analysis:</strong> Monthly demand visualized in Power BI, highlighting growth and seasonal patterns</li>
+<li><strong>Regional Heatmap:</strong> Seasonal and regional differences mapped to detect surplus and shortage regions</li>
 </ul>
 </section>
 
 <section class="mb-20">
 <h2 class="text-3xl font-bold mb-4">Step 3: Recommendation</h2>
 <p class="text-slate-600">
-I recommended a region-wise inventory allocation dashboard with weekly SQL updates, enabling the operations team to make faster, data-driven decisions.
+Based on the analysis, I recommended a region-wise inventory allocation dashboard with weekly SQL updates, enabling the operations team to make faster, data-driven decisions and optimize stock across regions.
 </p>
 </section>
 
 <section class="mb-20">
 <h2 class="text-3xl font-bold mb-4">Step 4: Implementation & Dashboard</h2>
 <p class="text-slate-600 mb-4">
-Implemented in Power BI: line charts, bar charts, KPI cards, and interactive simulation slider.
+Implemented in Power BI / Chart.js: line charts for forecast vs actual demand, bar charts for inventory levels, KPI cards, and an interactive simulation slider for what-if analysis.
 </p>
+
+<!-- Dashboard / Chart.js -->
 <div class="bg-white p-10 rounded-3xl shadow mb-10">
 <canvas id="evChart"></canvas>
 </div>
@@ -115,6 +117,7 @@ const evChart = new Chart(ctx, {
   }
 });
 
+// Slider simulation
 const slider=document.getElementById('demandSlider');
 const simResult=document.getElementById('simResult');
 
