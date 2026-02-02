@@ -110,3 +110,36 @@
                     <a href="mailto:ozgunbatuhan@gmail.com" class="bg-blue-600 px-8 py-3 rounded-full font-bold hover:bg-blue-500 transition"><i class="fa-solid fa-envelope mr-2"></i> ozgunbatuhan@gmail.com</a>
                     <a href="https://www.linkedin.com" target="_blank" class="bg-slate-800 px-8 py-3 rounded-full font-bold hover:bg-slate-700 transition"><i class="fa-brands fa-linkedin mr-2"></i> LinkedIn Profile</a>
                     <a href="
+                        " target="_blank" class="bg-slate-800 px-8 py-3 rounded-full font-bold hover:bg-slate-700 transition"><i class="fa-brands fa-github mr-2"></i> View Code on GitHub</a>
+                </div>
+            </div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 blur-[100px]"></div>
+        </section>
+    </div>
+
+    <script>
+        // Data Visualisation Script (Simulated Growth Data reflecting real trends)
+        const ctx = document.getElementById('businessChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Q1 23', 'Q2 23', 'Q3 23', 'Q4 23', 'Q1 24', 'Q2 24 (Proj)'],
+                // Data reflects recent growth trends for BEVs/PHEVs in Germany as per search results
+                data:, 
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                borderWidth: 4,
+                fill: true,
+                tension: 0.4
+            },
+            options: { 
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true }, x: { grid: { display: false } } }
+            }
+        });
+    </script>
+</body>
+</html>
+
